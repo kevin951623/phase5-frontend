@@ -1,11 +1,14 @@
 import "./App.css"
 // import {useState,useEffect} from "react";
-import NavBar from "./NavBar";
+import GuestNavBar from "./GuestNavBar";
+import GuestSportsbook from "./GuestSportsbook";
+import UserNavBar from "./UserNavBar";
+import UserSportsbook from "./UserSportsbook";
 import Home from "./Home";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import Sportsbook from "./Sportsbook";
+
 
 
 function App() {
@@ -15,7 +18,7 @@ function App() {
         path: '/',
         element: 
         <>
-          <NavBar/>
+         
           <Home/>
         </>
       },
@@ -34,11 +37,19 @@ function App() {
         </>
       },
       {
-        path: '/Sportsbook',
+        path: '/GuestSportsbook',
         element: 
         <>
-          <Sportsbook/>
-          <NavBar/>
+          <GuestSportsbook/>
+          <GuestNavBar/>
+        </>
+      },
+      {
+        path: '/UserSportsbook',
+        element: 
+        <>
+          <UserSportsbook/>
+          <UserNavBar/>
         </>
       },
       {

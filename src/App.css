@@ -1,0 +1,47 @@
+html, body {
+  /* overflow: hidden; */
+  margin: 0;
+}
+
+.video {
+  /* width: 100%;
+      height: 100%; */
+  width: 100vw;;
+  background-color: rgba(68, 24, 24, 0.5);
+   opacity: 50%; 
+}
+
+.piclogo{
+  width: 250px;
+  height: 100px;
+}
+
+.navBarLogin{
+  background-color: rgba(218,225,228,255);
+  z-index: 2;
+}
+
+#banner {
+  opacity: 95%;
+}
+
+.logInButton{
+  /* float: right; */
+  float: right;
+  /* margin:1rem; */
+  padding: 2.5rem;
+  
+}
+
+.logOutButton{
+  /* float: right; */
+  float: right;
+  /* margin:1rem; */
+  padding: 2.5rem;
+  
+}
+#enterButton{
+  margin-top: -35%;
+  margin-left: 50%;
+  position: absolute;
+}
