@@ -8,6 +8,7 @@ import Home from "./Home";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import MyBets from "./MyBets";
 
 
 
@@ -42,6 +43,14 @@ function App() {
         <>
           <GuestSportsbook/>
           <GuestNavBar/>
+        </>
+      },
+      {
+        path: '/MyBets',
+        element: 
+        <>
+          <MyBets/>
+          <UserNavBar/>
         </>
       },
       {
