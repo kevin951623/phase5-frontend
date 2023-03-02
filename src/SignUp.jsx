@@ -1,64 +1,46 @@
-// import { useNavigate } from "react-router-dom";
 
-// function SignUp (){
-//     let navigate = useNavigate();
-//     return(
-//         <>
-//         <div>
-//         <img onClick={() => {navigate('/')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
-//         <form>
-//             <div> Create a FanMade Sportsbook Account</div>
-//             <label>  Name: <input type="text" name="Name" /></label>  
-//             <label>  Email Address: <input type="text" name="Email Address" /></label>  
-//             <label>  Password: <input type="text" name="Password" /></label> 
-//             <label>  Confirm Password: <input type="text" name="Confirm Password" /></label> 
-//             <input type="Submit" value="Create Account" />
-//         </form>
-//         <button onClick={() => {navigate('/Login')}} href="/Login">Login Instead</button>
-        
-//         </div>
-//         </>
-//     )
+import { Form } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// }
-// export default SignUp;
-
-import React, { useState } from "react";
-import{ useNavigate} from 'react-router-dom'
-
-const Signup = ({formToggle, setFormToggle, setUser}) => {
-    const [username, setUsername] = useState("");
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const navigate = useNavigate()
+function Signup({setUser}) {
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const navigate = useNavigate()
+  const returnToLogin = () => navigate('/login')
 
     function handleSubmit(e) {
-      e.preventDefault();
-      fetch('http://localhost:3000/signup', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "name": name,
-          "email": email,
-          "username": username,
-          "password": password,
-          "password_confirmation": passwordConfirmation
-        }),
-      })
-        .then((r) => r.json())
-        .then(setUser);
-        navigate("/UserSportsbook")
+        e.preventDefault();
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              "username": username,
+              "name": name,
+              "email": email,
+              "password": password,
+              "password_confirmation": passwordConfirmation
+            }),
+        }).then((req) => {
+            if (req.ok) {
+                req.json()
+          .then((user) => setUser(user));
+          navigate('/UserSportsbook')      
+            }
+        })
     }
-    return (
-      <div className="signup-form-container">
+return (
+    <div>
+        <div>
         <img onClick={() => {navigate('/')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
-        <form className="signup-form" onSubmit={handleSubmit}>
-        <label htmlFor="username"></label>
-        <input
+            <Form onSubmit={handleSubmit}>
+            <label>Username</label>
+            <input
           type="text"
           id="username"
           placeholder="Username"
@@ -97,14 +79,18 @@ const Signup = ({formToggle, setFormToggle, setUser}) => {
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
-        <button className="signup-submit" type="submit">Submit</button>
-        <div onClick={() => setFormToggle(!formToggle)}>Already have an account?
-        <button onClick={() => {navigate('/Login')}} href="/Login">Login Instead</button>
+            <button type="submit">Sign Up!</button>
+            <p>Already have and acount?</p>
+            <button onClick={returnToLogin}>Return to Login</button>
+            </Form>
         </div>
-      </form>
-      </div>
-      
+    </div>
     );
-  }
+}
+export default Signup
 
-  export default Signup
+
+
+
+
+  

@@ -5,16 +5,16 @@ function UserNavBar(){
     let navigate = useNavigate();
     const [users, setUsers] = useState([])
 
-    const fetchUsers= async () => {
-            const req = await fetch('http://localhost:3000/users')
-            const res = await req.json()
+    // const fetchUsers= async () => {
+    //         const req = await fetch('http://localhost:3000/users')
+    //         const res = await req.json()
 
-            setUsers(res)
-            console.log(res)
-        }
-    useEffect(() => {
-        fetchUsers()
-    }, [])
+    //         setUsers(res)
+    //         console.log(res)
+    //     }
+    // useEffect(() => {
+    //     fetchUsers()
+    // }, [])
 
 return(
     <div id="banner" className = "banner">

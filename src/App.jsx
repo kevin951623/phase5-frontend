@@ -1,25 +1,34 @@
 import "./App.css"
-// import {useState,useEffect} from "react";
+import {useState,useEffect} from "react";
 import GuestNavBar from "./GuestNavBar";
 import GuestSportsbook from "./GuestSportsbook";
 import UserNavBar from "./UserNavBar";
 import UserSportsbook from "./UserSportsbook";
 import Home from "./Home";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
-import Login from "./Login";
 import SignUp from "./SignUp";
 import MyBets from "./MyBets";
+import Login from "./Login";
 
 
 
 function App() {
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    fetch("/me").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
   const router = createBrowserRouter(
     [
       {
         path: '/',
         element: 
         <>
-         
           <Home/>
         </>
       },
@@ -27,14 +36,14 @@ function App() {
         path: '/login',
         element: 
         <>
-          <Login/>
+          <Login setUser={setUser}/>
         </>
       },
       {
         path: '/SignUp',
         element: 
         <>
-          <SignUp/>
+          <SignUp  setUser={setUser} />
         </>
       },
       {
@@ -50,7 +59,7 @@ function App() {
         element: 
         <>
           <MyBets/>
-          <UserNavBar/>
+          <UserNavBar user={user}/>
         </>
       },
       {
@@ -58,7 +67,7 @@ function App() {
         element: 
         <>
           <UserSportsbook/>
-          <UserNavBar/>
+          <UserNavBar user={user}/>
         </>
       },
       {
