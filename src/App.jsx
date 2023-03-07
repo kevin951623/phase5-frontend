@@ -14,6 +14,9 @@ import Login from "./Login";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [bet, setBet] = useState([]);
+  
+ 
   
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -22,6 +25,10 @@ function App() {
       }
     });
   }, []);
+
+  
+
+
 
   const router = createBrowserRouter(
     [
@@ -50,24 +57,26 @@ function App() {
         path: '/GuestSportsbook',
         element: 
         <>
-          <GuestSportsbook/>
           <GuestNavBar/>
+          <GuestSportsbook bet={bet} setBet={setBet} user={user}/>
+          
         </>
       },
       {
         path: '/MyBets',
         element: 
         <>
-          <MyBets/>
           <UserNavBar user={user}/>
+          <MyBets user={user}/>
         </>
       },
       {
         path: '/UserSportsbook',
         element: 
         <>
-          <UserSportsbook/>
-          <UserNavBar user={user}/>
+          <UserNavBar user={user} setUser={setUser}/>
+          <UserSportsbook bet={bet} setBet={setBet} user={user}/>
+      
         </>
       },
       {
