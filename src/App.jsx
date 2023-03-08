@@ -14,7 +14,7 @@ import Login from "./Login";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [bet, setBet] = useState([]);
+  
   
  
   
@@ -58,7 +58,7 @@ function App() {
         element: 
         <>
           <GuestNavBar/>
-          <GuestSportsbook bet={bet} setBet={setBet} user={user}/>
+          <GuestSportsbook user={user}/>
           
         </>
       },
@@ -75,7 +75,7 @@ function App() {
         element: 
         <>
           <UserNavBar user={user} setUser={setUser}/>
-          <UserSportsbook bet={bet} setBet={setBet} user={user}/>
+          <UserSportsbook user={user} setUser={setUser}/>
       
         </>
       },

@@ -1,12 +1,16 @@
-//import { useNavigate } from "react-router-dom";
 import {useState,useEffect} from "react";
 import Teams from "./Teams";
 import BetSlip from "./BetSlip";
 
 
-function GuestSportsbook ({}) {
+function GuestSportsbook () {
     const [game, setGame] = useState([]);
-    const [betSlip, setBetSlip] = useState([]);
+    const [betSlip, setBetSlip] = useState([])
+    const [totalOdds, setTotalOdds] = useState(0)
+   
+   
+    // setTotalOdds(totalOdds + displayOdds.odd)
+
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -18,18 +22,24 @@ function GuestSportsbook ({}) {
 
     return(
         <div className="Usersport-container">
-            
             <div>
                 Teams:
                 {game.map((displayGames)=> {
-                    console.log(displayGames)
-                return <Teams displayGames={displayGames} setBetSlip={setBetSlip} betSlip={betSlip}/>
+                return <Teams   displayGames={displayGames} 
+                                setBetSlip={setBetSlip} 
+                                betSlip={betSlip} 
+                                totalOdds={totalOdds}
+                                setTotalOdds={setTotalOdds}/>
                 })}
             </div>
             <div>
                 Bet Slip:
-              <BetSlip betSlip={betSlip}/>
+              <BetSlip  betSlip={betSlip} 
+                        setBetSlip={setBetSlip}
+                        totalOdds={totalOdds}
+                        setTotalOdds={setTotalOdds}/>
             </div>
+           
         </div>
     )
 

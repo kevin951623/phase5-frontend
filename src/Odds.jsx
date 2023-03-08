@@ -1,29 +1,36 @@
 
-function Odds({ displayOdds, betSlip, setBetSlip }) {
-  const removeFromBetSlip = (index) => {
+function Odds({ displayOdds, betSlip, setBetSlip, totalOdds, setTotalOdds}) {
+
+    const handleClick = (displayOdds) => {
+        removeFromBetSlip(betSlip.indexOf(displayOdds))
+        setTotalOdds(totalOdds - displayOdds.odd)
+    }
+
+    const removeFromBetSlip = (index) => {
     const newBetSlip = [...betSlip];
     newBetSlip.splice(index, 1);
     setBetSlip(newBetSlip);
   };
-
+// console.log(displayOdds.odd);
   return (
     <div>
       <p>{displayOdds.team}</p>
       <p>{displayOdds.odd}</p>
-      <button onClick={() => removeFromBetSlip(betSlip.indexOf(displayOdds))}>Remove</button>
+      <button onClick={() => handleClick(displayOdds)}>Remove</button>
     </div>
   );
 }
 
 export default Odds;
 
-function oddsTotal({displayOdds}){
-    const oddsTotal = displayOdds.reduce((total, odds) => total + odds.odd, 0);
+// function oddsTotal({displayOdds}){
+//     const oddsTotal = displayOdds.reduce((total, odds) => total + odds.odd, 0);
     
-    return(
-      <div>
-        <p>{displayOdds.team}</p>
-        <p>{oddsTotal}</p>
-      </div>
-    )
-  }
+//     return(
+//       <div>
+//         <p>{displayOdds.team}</p>
+//         <p>{oddsTotal}</p>
+//       </div>
+//     )
+//   }
+

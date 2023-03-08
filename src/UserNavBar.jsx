@@ -25,7 +25,7 @@ return(
             <img className = "piclogo" onClick={() => {navigate('/UserSportsbook')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
             <div className = "myBetsButton"><button onClick={() => {navigate('/MyBets')}}> My Bets</button> </div>
             <div><button type="button" onClick={setUser ? logOut : () => navigate('/')}>LogOut</button> </div>
-            <h3>{user ? user.name : ""} {user ? user.balance : ""}</h3>
+            <h3>{user ? user.name : ""} {user ? user.balance.toFixed(2) : ""}</h3>
         </div>
     </div>
     
