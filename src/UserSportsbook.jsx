@@ -4,14 +4,15 @@ import Teams from "./Teams";
 import BetSlip from "./BetSlip";
 
 
+let gameNumber = 1;
+
 function UserSportsbook ({user,setUser}) {
     const [game, setGame] = useState([]);
-    const [betSlip, setBetSlip] = useState([])
-    const [totalOdds, setTotalOdds] = useState(0)
+    const [betSlip, setBetSlip] = useState([]);
+    const [totalOdds, setTotalOdds] = useState(0);
    
    
     // setTotalOdds(totalOdds + displayOdds.odd)
-
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -22,25 +23,30 @@ function UserSportsbook ({user,setUser}) {
     fetchGames()}, []);
 
     return(
-        <div className="Usersport-container">
+      <div className="Usersport-container">
             <div>
-                Teams:
-                {game.map((displayGames)=> {
-                return <Teams   displayGames={displayGames} 
+                {game.map((displayGames, i)=> {
+                return <Teams displayGames={displayGames} 
                                 setBetSlip={setBetSlip} 
                                 betSlip={betSlip} 
                                 totalOdds={totalOdds}
-                                setTotalOdds={setTotalOdds}/>
+                                setTotalOdds={setTotalOdds}
+                                gameID={gameNumber + i}
+                               
+                                />
                 })}
             </div>
-            <div>
+            <div className="betslip">
                 Bet Slip:
               <BetSlip  betSlip={betSlip} 
                         setBetSlip={setBetSlip}
                         totalOdds={totalOdds}
                         setTotalOdds={setTotalOdds}
                         user={user}
-                        setUser={setUser}/>
+                        setUser={setUser}
+                        gameID={gameNumber}
+                        
+                        />
             </div>
            
         </div>

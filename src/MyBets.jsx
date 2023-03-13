@@ -5,7 +5,7 @@ function MyBets ({user}){
     const [userBets, setUserBets] = useState("")
 
     useEffect(() => {
-    const fetchUserWithBets = async (id) => {
+    const fetchUserWithBets = async () => {
         const req = await fetch(`/users/${user.id}}`)
         const res = await req.json()
         setUserBets(res)
@@ -19,9 +19,7 @@ function MyBets ({user}){
            <div>
                 {userBets?.bets?.map((bet)=> {
                 return <p>Bet Amount: {bet.bet_amount} Payout: {bet.payout}</p>
-                
                 })}
-                
             </div> 
         </div>
     )

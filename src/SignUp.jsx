@@ -35,59 +35,69 @@ function Signup({setUser}) {
         })
     }
 return (
-    <div>
-        <div>
-        <img onClick={() => {navigate('/')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
-            <Form onSubmit={handleSubmit}>
-            <label>Username</label>
+  <div>        
+    <img className = "loginlogo" onClick={() => {navigate('/')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
+    <div class="form-box">
+            <Form class="form" onSubmit={handleSubmit}>
+            <span class="title">Sign up</span>
+            <span class="subtitle">Create a free account with your email.</span>
+            <div class="form-container">
             <input
           type="text"
+          class="input" 
           id="username"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <label htmlFor="name"></label>
         <input
           type="text"
+          class="input" 
           id="name"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="email"></label>
         <input
           type="text"
+          class="input" 
           id="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="password"></label>
         <input
           type="password"
+          class="input" 
           id="password"
           value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <label htmlFor="password_confirmation"></label>
         <input
           type="password"
+          class="input" 
           id="password_confirmation"
           placeholder="Confirm Password"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
+            </div>
+
             <button type="submit">Sign Up!</button>
-            <p>Already have and acount?</p>
-            <button onClick={returnToLogin}>Return to Login</button>
+            
             </Form>
-        </div>
+            <div class="form-section">
+              <p>Have an account? <a href="">Log in</a> </p>
+      </div>
+    </div>
     </div>
     );
 }
 export default Signup
+//<p>Already have and acount?</p>
+// <button onClick={returnToLogin}>Return to Login</button>
+
 
 
 

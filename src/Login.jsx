@@ -31,7 +31,7 @@ function Login({ setUsers }) {
   }
   return (
       <div>
-        <img onClick={() => {navigate('/')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
+        <img className = "loginlogo" onClick={() => {navigate('/')}} src="./FanMadeLogo.png" alt="fanmadelogo" href="/"/> 
           <Form onSubmit={handleSubmit}>
               <p>Login</p>
               <input

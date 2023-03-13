@@ -15,7 +15,6 @@ import Login from "./Login";
 function App() {
   const [user, setUser] = useState(null);
   
-  
  
   
   useEffect(() => {
@@ -25,8 +24,6 @@ function App() {
       }
     });
   }, []);
-
-  
 
 
 

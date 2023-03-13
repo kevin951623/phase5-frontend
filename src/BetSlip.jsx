@@ -1,8 +1,7 @@
 import Odds from "./Odds";
 import {useState} from "react";
 
-const BetSlip = ({betSlip, setBetSlip, totalOdds, setTotalOdds,user}) => {
-
+const BetSlip = ({betSlip, setBetSlip, totalOdds, setTotalOdds,user, gameID}) => {
     const [betAmount, setBetAmount] = useState(0)
    
 
@@ -11,51 +10,54 @@ const BetSlip = ({betSlip, setBetSlip, totalOdds, setTotalOdds,user}) => {
     };
 
     const payout = ((betAmount * totalOdds)/100);
-    
+
     const handleCreateBet = () => {
-        const updatedBalance = (user.balance - payout);
+        const updatedBalance = (user.balance - betAmount);
             fetch('/bets', {
-              method: 'POST',
-              headers: {
+                method: 'POST',
+                headers: {
                 'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
+                },
+                body: JSON.stringify({
+                "game_id": gameID,
                 "user_id": user.id,
                 "bet_amount": betAmount,
                 "payout": payout
-            })
+                })
             })
             .then(response => {
-              if (response.ok) {
+                if (response.ok) {
                 console.log('Data posted successfully!');
-              } else {
+                } else {
                 console.error('Error posting data.');
-              }
+                }
             });
 
+
             fetch(`/users/${user.id}}`, {
-              method: 'PATCH',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
                 "balance": updatedBalance
-              })
+                })
             })
             .then(response => {
-              if (response.ok) {
-                console.log('Data patched successfully!');
-                window.location.reload(); 
-              } else {
+                if (response.ok) {
+                    console.log('Data patched successfully!');
+                  window.location.reload(); 
+                } else {
                 console.error('Error patching data.');
-              }
+                }
             });
-          };
+            
+    };
 
     return (
     <div>
         <div className="BetSlip-Container">
-            <div>
+            <div classname="displayBets">
             {betSlip.map((displayOdds)=> {
             return <Odds    displayOdds={displayOdds}  
                             betSlip={betSlip} 
@@ -66,7 +68,7 @@ const BetSlip = ({betSlip, setBetSlip, totalOdds, setTotalOdds,user}) => {
             </div>
            
         </div>
-        <div>
+        <div classname="makingBets">
             <div>Total Odds: {totalOdds}</div>
             <div>Bet Amount:<input type="number" value={betAmount} onChange={handleInputBet}/></div>
             <div>Payout:{payout.toFixed(2)}</div>
